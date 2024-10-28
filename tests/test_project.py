@@ -5,7 +5,7 @@ from pages.project_main_page import Project
 
 @pytest.mark.regression
 @pytest.mark.usefixtures('user_login')
-class TestProjectSearch:
+class TestProject:
     def test_smoke_project_page(self, browser):
         main_page = Main(browser)
         main_page.click_first_project()

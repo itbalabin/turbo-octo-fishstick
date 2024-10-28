@@ -7,7 +7,7 @@ from pages.search_main_page import Search
 
 @pytest.mark.regression
 @pytest.mark.usefixtures('user_login')
-class TestProjectSearch:
+class TestSearch:
     def test_hellow_search(self, browser):
         main_page = Main(browser)
         main_page.click(BasePage.PROJECT_SECTION_BUTTON)
