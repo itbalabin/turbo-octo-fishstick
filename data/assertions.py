@@ -27,17 +27,17 @@ class Assertions(Base):
         expect(loc).to_be_hidden(timeout=700), msg
 
     def check_equals(self, actual, expected, msg):
-        assert actual == expected, msg
+        expect(actual).to_equal(expected, msg)
 
     def check_is_less_then(self, first, second, msg):
-        assert first < second, msg
+        expect(first).to_be_less_than(second, msg)
 
     def button_is_disabled(self, locator: str) -> bool:
         button = self.page.query_selector(locator)
         return button.is_disabled()
 
     def check_url_content(self, uri, msg):
-        assert f"{uri}" in self.page.url, msg
+        expect(f"{uri}").to_be_in(self.page.url, msg)
 
     def check_box_activated(self, locator, msg):  # проверка что чек бокс поставлен
         loc = self.page.locator(locator)
@@ -67,20 +67,12 @@ class Assertions(Base):
 
     def check_element_visible_and_active_by_index(self, locator, index, msg):
         loc = self.page.locator(locator).nth(index)
-        try:
-            expect(loc).to_be_visible(timeout=12000)
-        except AssertionError:
-            raise AssertionError(msg)
+        expect(loc).to_be_visible(timeout=12000), msg
 
-        if not loc.is_enabled():
-            raise AssertionError(msg)
+        expect(loc).to_be_enabled(), msg
 
     def check_element_visible_and_active(self, locator, msg):
         loc = self.page.locator(locator)
-        try:
-            expect(loc).to_be_visible(timeout=12000)
-        except AssertionError:
-            raise AssertionError(msg)
+        expect(loc).to_be_visible(timeout=12000), msg
 
-        if not loc.is_enabled():
-            raise AssertionError(msg)
+        expect(loc).to_be_enabled(), msg
