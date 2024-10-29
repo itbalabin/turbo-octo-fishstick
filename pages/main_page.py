@@ -1,0 +1,22 @@
+from locators.base_page import BasePage
+from pages.base import Base
+from data.constants import Constants
+from locators.auth import Auth
+from data.assertions import Assertions
+from playwright.sync_api import Page
+
+
+class Main(Base):
+    def __init__(self, page: Page) -> None:
+        super().__init__(page)
+        self.assertion = Assertions(page)
+
+    def user_login(self):
+        self.open("")
+        self.click(Auth.LOGIN_BUTTON)
+        self.input(Auth.USERNAME_INPUT, Constants.login)
+        self.input(Auth.PASSWORD_INPUT, Constants.password)
+        self.click(Auth.LOGIN_BTN)
+
+    def click_first_project(self):
+        self.click_first_element(BasePage.FIRST_PROJECT_IN_POPULAR_PROJECT)
